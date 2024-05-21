@@ -2,26 +2,27 @@ import streamlit as st
 import json
 
 # タイトルの設定
-st.title("トレーニングメニュー作成")
+st.title("REAXTIONトレーニングメニュー作成画面")
 
 # トレーニングメニュー名の入力
 training_name = st.text_input("トレーニングメニュー名")
 
 # プログラムの入力
 program = []
+program_titles = ["1.点灯設定", "2.待機", "3.次の点灯までの時間", "4.閉じる"]
 for i in range(4):
     st.markdown(f"<div style='border: 2px solid #000; padding: 10px; margin: 10px 0;'>", unsafe_allow_html=True)
-    st.subheader(f"プログラム {i+1}")
+    st.subheader(program_titles[i])
     order = i
-    numbers = st.number_input(f"プログラム {i+1} - ターゲット数または回数", min_value=1, max_value=3, step=1, key=f"numbers_{i}")
+    numbers = st.number_input(f"ターゲット数または回数 (key: numbers)", min_value=1, max_value=3, step=1, key=f"numbers_{i}")
     
     if i == 0:
-        random = st.selectbox(f"プログラム {i+1} - ランダム設定", options=[0, 1], format_func=lambda x: "オフ" if x == 0 else "オン", key=f"random_{i}")
-        colors = st.selectbox(f"プログラム {i+1} - 色設定", options=list(range(6)), key=f"colors_{i}")
-        onbeeper = st.selectbox(f"プログラム {i+1} - 点灯音", options=[0, 1], format_func=lambda x: "オフ" if x == 0 else "オン", key=f"onbeeper_{i}")
-        offbeeper = st.selectbox(f"プログラム {i+1} - 反応音", options=[0, 1], format_func=lambda x: "オフ" if x == 0 else "オン", key=f"offbeeper_{i}")
-        sensor = st.selectbox(f"プログラム {i+1} - センサー設定", options=[0, 1, 2, 3], format_func=lambda x: ["センサー(近距離)", "センサー(遠距離)", "タッチ(敏感)", "タッチ(鈍感)"][x], key=f"sensor_{i}")
-        flash = st.selectbox(f"プログラム {i+1} - 点灯設定", options=[0, 1], format_func=lambda x: "オフ" if x == 0 else "オン", key=f"flash_{i}")
+        random = st.selectbox(f"ランダム設定 (key: random)", options=[0, 1], format_func=lambda x: "オフ" if x == 0 else "オン", key=f"random_{i}")
+        colors = st.selectbox(f"色設定 (key: colors)", options=list(range(6)), key=f"colors_{i}")
+        onbeeper = st.selectbox(f"点灯音 (key: onbeeper)", options=[0, 1], format_func=lambda x: "オフ" if x == 0 else "オン", key=f"onbeeper_{i}")
+        offbeeper = st.selectbox(f"反応音 (key: offbeeper)", options=[0, 1], format_func=lambda x: "オフ" if x == 0 else "オン", key=f"offbeeper_{i}")
+        sensor = st.selectbox(f"センサー設定 (key: sensor)", options=[0, 1, 2, 3], format_func=lambda x: ["センサー(近距離)", "センサー(遠距離)", "タッチ(敏感)", "タッチ(鈍感)"][x], key=f"sensor_{i}")
+        flash = st.selectbox(f"点灯設定 (key: flash)", options=[0, 1], format_func=lambda x: "オフ" if x == 0 else "オン", key=f"flash_{i}")
         
         program.append({
             "order": order,
@@ -35,8 +36,8 @@ for i in range(4):
         })
     
     elif i == 1:
-        logic = st.number_input(f"プログラム {i+1} - ロジック設定", min_value=0, key=f"logic_{i}")
-        timeout = st.text_input(f"プログラム {i+1} - タイムアウト設定", key=f"timeout_{i}")
+        logic = st.number_input(f"ロジック設定 (key: logic)", min_value=0, key=f"logic_{i}")
+        timeout = st.text_input(f"タイムアウト設定 (key: timeout)", key=f"timeout_{i}")
         
         program.append({
             "order": order,
@@ -46,8 +47,8 @@ for i in range(4):
         })
     
     elif i == 2:
-        delay1 = st.text_input(f"プログラム {i+1} - スタート遅延", key=f"delay1_{i}")
-        delay2 = st.text_input(f"プログラム {i+1} - 次の点灯までの時間", key=f"delay2_{i}")
+        delay1 = st.text_input(f"スタート遅延 (key: delay1)", key=f"delay1_{i}")
+        delay2 = st.text_input(f"次の点灯までの時間 (key: delay2)", key=f"delay2_{i}")
         
         program.append({
             "order": order,
@@ -56,7 +57,7 @@ for i in range(4):
         })
     
     elif i == 3:
-        random = st.selectbox(f"プログラム {i+1} - ランダム設定", options=[0, 1], format_func=lambda x: "オフ" if x == 0 else "オン", key=f"random_{i}")
+        random = st.selectbox(f"ランダム設定 (key: random)", options=[0, 1], format_func=lambda x: "オフ" if x == 0 else "オン", key=f"random_{i}")
         
         program.append({
             "order": order,
@@ -66,7 +67,7 @@ for i in range(4):
     st.markdown("</div>", unsafe_allow_html=True)
 
 # 制限時間の設定
-limit_time = st.text_input("制限時間", value="∞")
+limit_time = st.text_input("制限時間 (key: limit_time)", value="∞")
 
 # 変換ボタンの設定
 if st.button("変換"):
