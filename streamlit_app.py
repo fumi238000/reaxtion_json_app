@@ -78,7 +78,7 @@ if st.button("変換"):
         "limit_time": limit_time
     }
     json_data = json.dumps(data, ensure_ascii=False, indent=2)
-    
+
     # 結果を表示
     st.subheader("変換結果")
-    st.code(json_data, language="json")
+    st.code(f'Coding:{json_data}', language="json")
