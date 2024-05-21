@@ -8,15 +8,9 @@ def show():
     # トレーニングメニュー名の入力
     training_name = st.text_input("トレーニングメニュー名 *")
 
-    # トレーニングメニュー名のバリデーション
-    if len(training_name) == 0:
-        st.error("トレーニングメニュー名は必須です")
-    elif len(training_name) > 50:
-        st.error("トレーニングメニュー名は50文字以内で入力してください")
-
     # プログラムの入力
     program = []
-    program_titles = ["1.開く", "2.待つ", "3.次の点灯まで", "4.閉じる"]
+    program_titles = ["1.開く", "2.待つ", "3.次の点灯までの時間", "4.閉じる"]
     numbers_options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, "all"]
     timeout_options = ["✖️", "0.4", "0.6", "0.8", "1", "1.2", "1.5", "2", "3", "4", "5", "6", "7", "8", "9", "10", "20", "30"]
     delay1_options = ["0", "3", "5", "10"]
@@ -30,8 +24,6 @@ def show():
         4: "紫",
         5: "オレンジ"
     }
-
-    valid_input = len(training_name) > 0 and len(training_name) <= 50
 
     for i in range(4):
         st.markdown(f"<div style='border: 2px solid #000; padding: 10px; margin: 10px 0;'>", unsafe_allow_html=True)
@@ -50,9 +42,6 @@ def show():
                 key=f"colors_{i}",
                 default=list(colors_options.keys())
             )
-            if len(colors) == 0:
-                st.error("色は必ず1つ以上選択してください")
-                valid_input = False
             onbeeper = st.selectbox(f"点灯音 (key: onbeeper)", options=[0, 1], format_func=lambda x: "off" if x == 0 else "on", key=f"onbeeper_{i}", index=1)
             offbeeper = st.selectbox(f"反応音 (key: offbeeper)", options=[0, 1], format_func=lambda x: "off" if x == 0 else "on", key=f"offbeeper_{i}", index=1)
             sensor = st.selectbox(f"センサー設定 (key: sensor)", options=[0, 1, 2, 3], format_func=lambda x: ["センサー(近距離)", "センサー(遠距離)", "タッチ(敏感)", "タッチ(鈍感)"][x], key=f"sensor_{i}")
@@ -70,7 +59,10 @@ def show():
             })
 
         elif i == 1:
+            # TODO: 以下true or falseで設定すること
+            # TODO: 以下文言を設定すること
             logic = st.number_input(f"ロジック設定 (key: logic)", min_value=0, key=f"logic_{i}")
+            # TODO: falseの場合は、以下の設定が不要のため非表示とする
             timeout = st.selectbox(f"タイムアウト設定 (key: timeout)", options=timeout_options, key=f"timeout_{i}")
 
             program.append({
@@ -103,15 +95,36 @@ def show():
     limit_time = st.selectbox("制限時間 (key: limit_time)", options=limit_time_options, key="limit_time")
 
     # 変換ボタンの設定
-    if st.button("変換") and valid_input:
-        # 入力データをJSON形式に変換
-        data = {
-            "name": training_name,
-            "program": program,
-            "limit_time": limit_time
-        }
-        json_data = json.dumps(data, ensure_ascii=False, indent=2)
+    if st.button("変換"):
+        # バリデーションのチェック
+        validation_errors = []
+        valid_input = True
 
-        # 結果を表示
-        st.subheader("変換結果")
-        st.code(f'Coding:{json_data}', language="json")
+        if len(training_name) == 0:
+            validation_errors.append("トレーニングメニュー名は必須です")
+            valid_input = False
+        elif len(training_name) > 50:
+            validation_errors.append("トレーニングメニュー名は50文字以内で入力してください")
+            valid_input = False
+
+        if any('colors' in step and len(step['colors']) == 0 for step in program):
+            validation_errors.append("色は必ず1つ以上選択してください")
+            valid_input = False
+
+        if valid_input:
+            # 入力データをJSON形式に変換
+            data = {
+                "name": training_name,
+                "program": program,
+                "limit_time": limit_time
+            }
+            json_data = json.dumps(data, ensure_ascii=False, indent=2)
+
+            # 結果を表示
+            st.subheader("変換結果")
+            st.code(f'Coding:{json_data}', language="json")
+        else:
+            for error in validation_errors:
+                st.error(error)
+
+show()
