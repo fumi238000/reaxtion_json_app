@@ -6,11 +6,11 @@ def show():
     st.title("REAXTIONトレーニングメニュー作成画面")
 
     # トレーニングメニュー名の入力
-    st.markdown("### A.トレーニングメニュー名")
+    st.markdown("## A.トレーニングメニュー名")
     training_name = st.text_input("トレーニングメニュー名 *")
 
     # B.ターゲット設定のタイトル
-    st.markdown("### B.ターゲット設定")
+    st.markdown("## B.ターゲット設定")
 
     # プログラムの入力
     program = []
@@ -30,8 +30,8 @@ def show():
     }
 
     for i in range(4):
-        st.markdown(f"<div style='border: 2px solid #000; padding: 10px; margin: 10px 0;'>", unsafe_allow_html=True)
-        st.markdown(f"#### {program_titles[i]}")
+        st.markdown(f"<div style='border: 2px solid #000;'>", unsafe_allow_html=True)
+        st.markdown(f"##### {program_titles[i]}")
         order = i
 
         if i == 0 or i == 3:
