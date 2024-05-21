@@ -11,7 +11,7 @@ docker-compose build
 docker-compose up -d
 ```
 
-立ち上がればok
+立ち上がれば ok
 
 - http://localhost:8501/
 
@@ -25,4 +25,20 @@ docker-compose up -d
 
 ```shell
  docker-compose logs
+```
+
+## 値メモ
+
+```shell
+# センサー
+sensor
+センサー(近距離)": 0
+"センサー(遠距離)" 1
+"タッチ(敏感)": 2
+"タッチ(鈍感): 3
+
+# 論値
+logic
+全て: 1
+任意: 0
 ```
