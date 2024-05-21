@@ -15,6 +15,14 @@ timeout_options = ["✖️", "0.4", "0.6", "0.8", "1", "1.2", "1.5", "2", "3", "
 delay1_options = ["0", "3", "5", "10"]
 delay2_options = ["0.1", "0.3", "0.5", "0.8", "1", "1.5", "2", "3", "4", "5", "6", "8", "10"]
 limit_time_options = ["∞", "10s", "15s", "30s", "45s", "1min.", "2min.", "3min.", "5min.", "10min."]
+colors_options = {
+    0: "赤",
+    1: "青",
+    2: "緑",
+    3: "黄",
+    4: "紫",
+    5: "オレンジ"
+}
 
 for i in range(4):
     st.markdown(f"<div style='border: 2px solid #000; padding: 10px; margin: 10px 0;'>", unsafe_allow_html=True)
@@ -24,7 +32,12 @@ for i in range(4):
     
     if i == 0:
         random = st.selectbox(f"ランダム設定 (key: random)", options=[0, 1], format_func=lambda x: "off" if x == 0 else "on", key=f"random_{i}", index=1)
-        colors = st.selectbox(f"色設定 (key: colors)", options=list(range(6)), key=f"colors_{i}")
+        colors = st.multiselect(
+            f"色設定 (key: colors)", 
+            options=list(colors_options.keys()), 
+            format_func=lambda x: colors_options[x], 
+            key=f"colors_{i}"
+        )
         onbeeper = st.selectbox(f"点灯音 (key: onbeeper)", options=[0, 1], format_func=lambda x: "off" if x == 0 else "on", key=f"onbeeper_{i}", index=1)
         offbeeper = st.selectbox(f"反応音 (key: offbeeper)", options=[0, 1], format_func=lambda x: "off" if x == 0 else "on", key=f"offbeeper_{i}", index=1)
         sensor = st.selectbox(f"センサー設定 (key: sensor)", options=[0, 1, 2, 3], format_func=lambda x: ["センサー(近距離)", "センサー(遠距離)", "タッチ(敏感)", "タッチ(鈍感)"][x], key=f"sensor_{i}")
