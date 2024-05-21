@@ -6,11 +6,15 @@ def show():
     st.title("REAXTIONトレーニングメニュー作成画面")
 
     # トレーニングメニュー名の入力
+    st.markdown("### A.トレーニングメニュー名")
     training_name = st.text_input("トレーニングメニュー名 *")
+
+    # B.ターゲット設定のタイトル
+    st.markdown("### B.ターゲット設定")
 
     # プログラムの入力
     program = []
-    program_titles = ["1.開く", "2.待つ", "3.次の点灯までの時間", "4.閉じる"]
+    program_titles = ["B-1. 開く", "B-2. 待つ", "B-3. 次の点灯までの時間", "B-4. 閉じる"]
     numbers_options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, "all"]
     timeout_options = ["✖️", "0.4", "0.6", "0.8", "1", "1.2", "1.5", "2", "3", "4", "5", "6", "7", "8", "9", "10", "20", "30"]
     delay1_options = ["0", "3", "5", "10"]
@@ -27,7 +31,7 @@ def show():
 
     for i in range(4):
         st.markdown(f"<div style='border: 2px solid #000; padding: 10px; margin: 10px 0;'>", unsafe_allow_html=True)
-        st.subheader(program_titles[i])
+        st.markdown(f"#### {program_titles[i]}")
         order = i
 
         if i == 0 or i == 3:
@@ -91,8 +95,9 @@ def show():
             })
         st.markdown("</div>", unsafe_allow_html=True)
 
-    # 制限時間の設定
-    limit_time = st.selectbox("制限時間 (key: limit_time)", options=limit_time_options, key="limit_time")
+    # 制限時間のタイトルと設定
+    st.subheader("C.制限時間の設定")
+    limit_time = st.selectbox("制限時間 *", options=limit_time_options, key="limit_time")
 
     # 変換ボタンの設定
     if st.button("変換"):
