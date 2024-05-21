@@ -5,7 +5,7 @@ import json
 st.title("REAXTIONトレーニングメニュー作成画面")
 
 # トレーニングメニュー名の入力
-training_name = st.text_input("トレーニングメニュー名")
+training_name = st.text_input("トレーニングメニュー名 *")
 
 # トレーニングメニュー名のバリデーション
 if len(training_name) == 0:
@@ -15,7 +15,7 @@ elif len(training_name) > 50:
 
 # プログラムの入力
 program = []
-program_titles = ["1.点灯設定", "2.待機", "3.次の点灯までの時間", "4.閉じる"]
+program_titles = ["1.開く", "2.待つ", "3.次の点灯まで", "4.閉じる"]
 numbers_options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, "all"]
 timeout_options = ["✖️", "0.4", "0.6", "0.8", "1", "1.2", "1.5", "2", "3", "4", "5", "6", "7", "8", "9", "10", "20", "30"]
 delay1_options = ["0", "3", "5", "10"]
@@ -36,12 +36,14 @@ for i in range(4):
     st.markdown(f"<div style='border: 2px solid #000; padding: 10px; margin: 10px 0;'>", unsafe_allow_html=True)
     st.subheader(program_titles[i])
     order = i
-    numbers = st.selectbox(f"ターゲット数または回数 (key: numbers)", options=numbers_options, key=f"numbers_{i}")
+    
+    if i == 0 or i == 3:
+        numbers = st.selectbox(f"ターゲット数または回数 (key: numbers)", options=numbers_options, key=f"numbers_{i}")
     
     if i == 0:
         random = st.selectbox(f"ランダム設定 (key: random)", options=[0, 1], format_func=lambda x: "off" if x == 0 else "on", key=f"random_{i}", index=1)
         colors = st.multiselect(
-            f"色設定 (key: colors)", 
+            f"色設定 (key: colors) *", 
             options=list(colors_options.keys()), 
             format_func=lambda x: colors_options[x], 
             key=f"colors_{i}",
@@ -72,14 +74,13 @@ for i in range(4):
         
         program.append({
             "order": order,
-            "numbers": numbers,
             "logic": logic,
             "timeout": timeout
         })
     
     elif i == 2:
-        delay1 = st.selectbox(f"スタート遅延 (key: delay1)", options=delay1_options, key=f"delay1_{i}")
-        delay2 = st.selectbox(f"次の点灯までの時間 (key: delay2)", options=delay2_options, key=f"delay2_{i}")
+        delay1 = st.selectbox(f"最短 (key: delay1)", options=delay1_options, key=f"delay1_{i}")
+        delay2 = st.selectbox(f"最長 (key: delay2)", options=delay2_options, key=f"delay2_{i}")
         
         program.append({
             "order": order,
