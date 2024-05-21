@@ -10,11 +10,17 @@ training_name = st.text_input("トレーニングメニュー名")
 # プログラムの入力
 program = []
 program_titles = ["1.点灯設定", "2.待機", "3.次の点灯までの時間", "4.閉じる"]
+numbers_options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, "all"]
+timeout_options = ["✖️", "0.4", "0.6", "0.8", "1", "1.2", "1.5", "2", "3", "4", "5", "6", "7", "8", "9", "10", "20", "30"]
+delay1_options = ["0", "3", "5", "10"]
+delay2_options = ["0.1", "0.3", "0.5", "0.8", "1", "1.5", "2", "3", "4", "5", "6", "8", "10"]
+limit_time_options = ["∞", "10s", "15s", "30s", "45s", "1min.", "2min.", "3min.", "5min.", "10min."]
+
 for i in range(4):
     st.markdown(f"<div style='border: 2px solid #000; padding: 10px; margin: 10px 0;'>", unsafe_allow_html=True)
     st.subheader(program_titles[i])
     order = i
-    numbers = st.number_input(f"ターゲット数または回数 (key: numbers)", min_value=1, max_value=3, step=1, key=f"numbers_{i}")
+    numbers = st.selectbox(f"ターゲット数または回数 (key: numbers)", options=numbers_options, key=f"numbers_{i}")
     
     if i == 0:
         random = st.selectbox(f"ランダム設定 (key: random)", options=[0, 1], format_func=lambda x: "off" if x == 0 else "on", key=f"random_{i}", index=1)
@@ -37,7 +43,7 @@ for i in range(4):
     
     elif i == 1:
         logic = st.number_input(f"ロジック設定 (key: logic)", min_value=0, key=f"logic_{i}")
-        timeout = st.text_input(f"タイムアウト設定 (key: timeout)", key=f"timeout_{i}")
+        timeout = st.selectbox(f"タイムアウト設定 (key: timeout)", options=timeout_options, key=f"timeout_{i}")
         
         program.append({
             "order": order,
@@ -47,8 +53,8 @@ for i in range(4):
         })
     
     elif i == 2:
-        delay1 = st.text_input(f"スタート遅延 (key: delay1)", key=f"delay1_{i}")
-        delay2 = st.text_input(f"次の点灯までの時間 (key: delay2)", key=f"delay2_{i}")
+        delay1 = st.selectbox(f"スタート遅延 (key: delay1)", options=delay1_options, key=f"delay1_{i}")
+        delay2 = st.selectbox(f"次の点灯までの時間 (key: delay2)", options=delay2_options, key=f"delay2_{i}")
         
         program.append({
             "order": order,
@@ -67,7 +73,7 @@ for i in range(4):
     st.markdown("</div>", unsafe_allow_html=True)
 
 # 制限時間の設定
-limit_time = st.text_input("制限時間 (key: limit_time)", value="∞")
+limit_time = st.selectbox("制限時間 (key: limit_time)", options=limit_time_options, key="limit_time")
 
 # 変換ボタンの設定
 if st.button("変換"):
