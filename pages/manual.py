@@ -3,7 +3,7 @@ import json
 
 def show():
     # タイトルの設定
-    st.title("REAXTIONトレーニングメニュー作成画面")
+    st.title("マニュアル問題")
 
     # トレーニングメニュー名の入力
     st.markdown("## A.トレーニングメニュー名")
