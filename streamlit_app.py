@@ -17,12 +17,12 @@ for i in range(4):
     numbers = st.number_input(f"ターゲット数または回数 (key: numbers)", min_value=1, max_value=3, step=1, key=f"numbers_{i}")
     
     if i == 0:
-        random = st.selectbox(f"ランダム設定 (key: random)", options=[0, 1], format_func=lambda x: "off" if x == 0 else "on", key=f"random_{i}")
+        random = st.selectbox(f"ランダム設定 (key: random)", options=[0, 1], format_func=lambda x: "off" if x == 0 else "on", key=f"random_{i}", index=1)
         colors = st.selectbox(f"色設定 (key: colors)", options=list(range(6)), key=f"colors_{i}")
-        onbeeper = st.selectbox(f"点灯音 (key: onbeeper)", options=[0, 1], format_func=lambda x: "off" if x == 0 else "on", key=f"onbeeper_{i}")
-        offbeeper = st.selectbox(f"反応音 (key: offbeeper)", options=[0, 1], format_func=lambda x: "off" if x == 0 else "on", key=f"offbeeper_{i}")
+        onbeeper = st.selectbox(f"点灯音 (key: onbeeper)", options=[0, 1], format_func=lambda x: "off" if x == 0 else "on", key=f"onbeeper_{i}", index=1)
+        offbeeper = st.selectbox(f"反応音 (key: offbeeper)", options=[0, 1], format_func=lambda x: "off" if x == 0 else "on", key=f"offbeeper_{i}", index=1)
         sensor = st.selectbox(f"センサー設定 (key: sensor)", options=[0, 1, 2, 3], format_func=lambda x: ["センサー(近距離)", "センサー(遠距離)", "タッチ(敏感)", "タッチ(鈍感)"][x], key=f"sensor_{i}")
-        flash = st.selectbox(f"点灯設定 (key: flash)", options=[0, 1], format_func=lambda x: "off" if x == 0 else "on", key=f"flash_{i}")
+        flash = st.selectbox(f"点灯設定 (key: flash)", options=[0, 1], format_func=lambda x: "off" if x == 0 else "on", key=f"flash_{i}", index=1)
         
         program.append({
             "order": order,
@@ -57,7 +57,7 @@ for i in range(4):
         })
     
     elif i == 3:
-        random = st.selectbox(f"ランダム設定 (key: random)", options=[0, 1], format_func=lambda x: "off" if x == 0 else "on", key=f"random_{i}")
+        random = st.selectbox(f"ランダム設定 (key: random)", options=[0, 1], format_func=lambda x: "off" if x == 0 else "on", key=f"random_{i}", index=1)
         
         program.append({
             "order": order,
