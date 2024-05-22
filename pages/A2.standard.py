@@ -1,10 +1,13 @@
 import streamlit as st
 import json
 
-def show():
-    # タイトルの設定
+# タイトル
+def title():
+    # トレーニングメニュー名の入力
     st.title("スタンダート")
 
+# json生成
+def show_json():
     # モードの設定（固定）
     mode = "Standard"
 
@@ -82,4 +85,39 @@ def show():
             for error in validation_errors:
                 st.error(error)
 
-show()
+# 仕様書
+def show_specification():
+    # 仕様書ページの内容
+    st.title("仕様書")
+    st.write("""
+    ### 構成
+
+    ```json
+    "mode": "Standard",
+    "name": "スタンダート",
+    "prefer": {
+        "color_num_index": 0, // 色の数
+        "target_num_index": 0, // ターゲット数
+        "delay_index": 2, // 次の点灯までの時間(最短)
+        "delay2_index": 2, // 次の点灯までの時間(最長)
+        "timeout_index": 0, // タイムアウト
+        "onbeeper_index": 1, // 消灯音
+        "offbeeper_index": 0, // 反応音
+        "flash_index": 0, // センサー
+        "sense_index": 0, // 点滅
+        "train_time_index": 3, // トレーニング時間
+        "colors": 32, // 使用する色
+        "start_delay_index": 1, // スタート遅延
+        "ending_index": 0, // 終了
+        "cycles_index": 3, // サイクル
+        "show_graphic": false // グラフィック表示
+      }
+    }
+    ```
+
+    """)
+
+
+title()
+show_specification()
+show_json()

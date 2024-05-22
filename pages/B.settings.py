@@ -6,9 +6,9 @@ def show():
     st.write("""
     ## 設定
 
-    ### 1. コードを埋め込む方法
-    ### 2. 
-
+    ### 参考資料
+    - https://vimeo.com/946505722/dba7412292
+    - https://vimeo.com/946497278/524047e2d1?share=copy
     """)
 
 show()

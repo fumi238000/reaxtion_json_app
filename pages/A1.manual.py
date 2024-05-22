@@ -1,6 +1,7 @@
 import streamlit as st
 import json
 
+# タイトル
 def title():
     # トレーニングメニュー名の入力
     st.markdown("## マニュアル問題")
@@ -141,7 +142,40 @@ def show_specification():
     st.write("""
     ### 構成
 
-    - 以下の4つで構成されています。1~4を順番に実行することで、Reaxtionは動作しています。
+
+    ```json
+    {
+      "name": "hoge",
+      "program": [
+        {
+            "order": 0,
+            "numbers": 1,
+            "random": 0,
+            "colors": 2,
+            "onbeeper": 0,
+            "offbeeper": 0,
+            "sensor": 0,
+            "flash": 0
+        },
+        {
+            "order": 1,
+            "numbers": 1,
+            "logic": 0,
+            "timeout": "0"
+        },
+        {
+            "order": 2,
+            "delay1": "3",
+            "delay2": "3"
+        },
+        {
+            "order": 3,
+            "numbers": 1,
+            "random": 0
+        }
+      ]
+    }
+    ```
 
     ```json
     Coding:{

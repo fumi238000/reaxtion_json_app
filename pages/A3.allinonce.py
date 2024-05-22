@@ -1,12 +1,17 @@
 import streamlit as st
 import json
 
-def show_standard():
+# タイトル
+def title():
+    # トレーニングメニュー名の入力
+    st.title("同時点灯")
+
+# json生成
+def show_json():
     # タイトルの設定
-    st.title("スタンダート")
 
     # モードの設定（固定）
-    mode = "Standard"
+    mode = "Allinonce"
 
     # トレーニングメニュー名の入力
     st.markdown("## A.トレーニングメニュー名")
@@ -82,4 +87,39 @@ def show_standard():
             for error in validation_errors:
                 st.error(error)
 
-show_standard()
+# 仕様書
+def show_specification():
+    # 仕様書ページの内容
+    st.title("仕様書")
+    st.write("""
+    ### 構成
+
+    ```json
+    {
+      "mode": "Allinonce",
+      "name": "同時点灯",
+      "prefer": {
+          "color_num_index": 0,
+          "target_num_index": 2,
+          "delay_index": 2,
+          "delay2_index": 2,
+          "timeout_index": 0,
+          "onbeeper_index": 1,
+          "offbeeper_index": 0,
+          "flash_index": 0,
+          "sense_index": 0,
+          "train_time_index": 4,
+          "colors": 2,
+          "sign_index": 0,
+          "start_delay_index": 3,
+          "ending_index": 0,
+          "cycles_index": 3,
+          "show_graphic": false
+      }
+    }
+    ```
+    """)
+
+title()
+show_specification()
+show_json()

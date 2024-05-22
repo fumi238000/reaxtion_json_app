@@ -1,10 +1,13 @@
 import streamlit as st
 import json
 
-def show():
-    # タイトルの設定
+# タイトル
+def title():
+    # トレーニングメニュー名の入力
     st.title("複数プレイ")
 
+
+def show_json():
     # モードの設定
     mode = "Multistandard"
 
@@ -87,4 +90,38 @@ def show():
             for error in validation_errors:
                 st.error(error)
 
-show()
+
+def show_specification():
+    # 仕様書ページの内容
+    st.title("仕様書")
+    st.write("""
+    ### 構成
+
+    ```json
+    {
+        "mode": "Multistandard",
+        "name": "2人",
+        "prefer": {
+            "color_num_index": 0,
+            "target_num_index": 0,
+            "delay_index": 2,
+            "delay2_index": 2,
+            "timeout_index": 0,
+            "onbeeper_index": 1,
+            "offbeeper_index": 0,
+            "flash_index": 0,
+            "sense_index": 0,
+            "train_time_index": 0,
+            "colors": 2,
+            "start_delay_index": 0,
+            "logic_index_g": [0, 0, 0, 0],
+            "show_graphic": false
+        }
+    }
+    ```
+    """)
+
+
+title()
+show_specification()
+show_json()
