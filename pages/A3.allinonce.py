@@ -99,22 +99,22 @@ def show_specification():
       "mode": "Allinonce",
       "name": "同時点灯",
       "prefer": {
-          "color_num_index": 0,
-          "target_num_index": 2,
-          "delay_index": 2,
-          "delay2_index": 2,
-          "timeout_index": 0,
-          "onbeeper_index": 1,
-          "offbeeper_index": 0,
-          "flash_index": 0,
-          "sense_index": 0,
-          "train_time_index": 4,
-          "colors": 2,
-          "sign_index": 0,
-          "start_delay_index": 3,
-          "ending_index": 0,
-          "cycles_index": 3,
-          "show_graphic": false
+        "color_num_index": 0,
+        "target_num_index": 2,
+        "delay_index": 2,
+        "delay2_index": 2,
+        "timeout_index": 0,
+        "onbeeper_index": 1,
+        "offbeeper_index": 0,
+        "flash_index": 0,
+        "sense_index": 0,
+        "train_time_index": 4,
+        "colors": 2,
+        "sign_index": 0,
+        "start_delay_index": 3,
+        "ending_index": 0,
+        "cycles_index": 3,
+        "show_graphic": false
       }
     }
     ```
