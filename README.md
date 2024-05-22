@@ -1,5 +1,9 @@
 # README
 
+## デプロイ
+
+https://reaxtionjsonapp-vb5bmyoqhvffbfxzchfksw.streamlit.app/
+
 streamlit の環境を作成するテンプレート
 
 ## setup
