@@ -1,9 +1,14 @@
 import streamlit as st
 import json
 
+def title():
+    # トレーニングメニュー名の入力
+    st.markdown("## マニュアル問題")
+
+# jsonを生成する処理
 def show_manual():
     # タイトルの設定
-    st.title("マニュアル問題")
+    st.title("json生成")
 
     # トレーニングメニュー名の入力
     st.markdown("## A.トレーニングメニュー名")
@@ -129,6 +134,7 @@ def show_manual():
             for error in validation_errors:
                 st.error(error)
 
+# 仕様書
 def show_specification():
     # 仕様書ページの内容
     st.title("仕様書")
@@ -212,5 +218,6 @@ def show_specification():
 
     """)
 
-show_manual()
+title()
 show_specification()
+show_manual()
